@@ -1,13 +1,13 @@
-#Tudu 
-##a simple Todo app I created to start learning how to build a react App.
+# Tudu 
+## a simple Todo app I created to start learning how to build a react App.
 
-###Phase 1: Everything is working on the frontend:
+### Phase 1: Everything is working on the frontend:
 -Todo's can be added
 -When checkmarked Todo's will change appearance
 -A list of Todo's can be viewed as they are added
 
 ## Working on
-###Phase 2:
+### Phase 2:
 -Connect a database to save the Todo's created
 -Add functionality to delete todo's
 
