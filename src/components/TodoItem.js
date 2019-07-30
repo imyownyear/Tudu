@@ -1,6 +1,7 @@
 import React from "react"
 import '../App.css';
 
+
 function Todo(props){
     const completedStyle = {
         fontStyle: "italic",
