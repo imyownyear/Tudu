@@ -11,7 +11,6 @@ class App extends React.Component {
     }
     this.addTodo = this.addTodo.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    //this.checkBoxHandleChange = this.checkBoxHandleChange.bind(this)
   }
   componentDidMount(){
     //api calls and what not
@@ -19,7 +18,6 @@ class App extends React.Component {
 
   addTodo(todo){
     this.setState((prevState) =>  {
-      console.log("clicked")
       return{
         toDos: prevState.toDos.concat(todo),
         todoText: ""
@@ -38,24 +36,28 @@ class App extends React.Component {
   //Handles input change
   handleChange(event){
     const {name, value, type} = event.target
-    type === "checkbox" ? this.setState(prevState => {
-          const updatedTodos = prevState.toDos.map(todo =>{
-            console.log(todo.props.id, name)
-              if(todo.props.id.toString() === name){
-                return (<Todo 
-                  completed={!todo.props.completed} 
-                  text={todo.props.text}
-                  handleChange={this.handleChange}
-                  id={todo.props.id}
-                  key={todo.props.id}
-                  />)
-              }
-              return todo
-          })
-          return{
-            toDos: updatedTodos
-          }
-        }) : this.setState({ [name]: value})
+    if(type !== "checkbox"){
+      return this.setState({ [name]: value})
+    }
+    return (this.setState(prevState => {
+      const updatedTodos = prevState.toDos.map(todo =>{
+          if(todo.props.id.toString() === name){
+            return (
+              <Todo 
+                completed={!todo.props.completed}
+                text={todo.props.text}
+                handleChange={this.handleChange}
+                id={todo.props.id}
+                key={todo.props.id}
+              />)
+            }
+            return todo
+        })
+        return{
+          toDos: updatedTodos
+        }
+      })
+    )
   }
 
   render(){
@@ -79,14 +81,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// this.setState({loading: true})
-//         fetch("https://swapi.co/api/people/1")
-//             .then(response => response.json())
-//             .then(data => {
-//                 this.setState({
-//                     loading: false,
-//                     character: data
-//                 })
-//             })
-//     }
